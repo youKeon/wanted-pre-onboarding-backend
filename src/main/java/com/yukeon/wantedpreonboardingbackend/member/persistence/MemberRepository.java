@@ -1,4 +1,4 @@
-package com.yukeon.wantedpreonboardingbackend.member.domain.repository;
+package com.yukeon.wantedpreonboardingbackend.member.persistence;
 
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

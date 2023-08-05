@@ -2,7 +2,7 @@ package com.yukeon.wantedpreonboardingbackend.auth.application;
 
 import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
-import com.yukeon.wantedpreonboardingbackend.member.domain.repository.MemberRepository;
+import com.yukeon.wantedpreonboardingbackend.member.persistence.MemberRepository;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -2,7 +2,7 @@ package com.yukeon.wantedpreonboardingbackend.member.application;
 
 import com.yukeon.wantedpreonboardingbackend.auth.jwt.JwtTokenProvider;
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
-import com.yukeon.wantedpreonboardingbackend.member.domain.repository.MemberRepository;
+import com.yukeon.wantedpreonboardingbackend.member.persistence.MemberRepository;
 import com.yukeon.wantedpreonboardingbackend.member.dto.request.MemberSignInRequest;
 import com.yukeon.wantedpreonboardingbackend.member.dto.request.MemberSignUpRequest;
 import com.yukeon.wantedpreonboardingbackend.member.dto.response.MemberSignInResponse;
