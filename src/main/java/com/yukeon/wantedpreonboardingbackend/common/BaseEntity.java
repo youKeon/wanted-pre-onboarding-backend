@@ -20,7 +20,5 @@ public abstract class BaseEntity {
     private LocalDateTime createdAt;
 
     @Column(name = "updatedAt")
-    private LocalDateTime updatedAt = LocalDateTime.now().minusDays(7);
-
-    private boolean isDeleted;
+    private LocalDateTime updatedAt;
 }
