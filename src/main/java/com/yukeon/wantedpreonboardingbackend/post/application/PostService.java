@@ -4,9 +4,14 @@ import com.yukeon.wantedpreonboardingbackend.auth.exception.NoSuchMemberExceptio
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
 import com.yukeon.wantedpreonboardingbackend.member.domain.repository.MemberRepository;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
+import com.yukeon.wantedpreonboardingbackend.post.domain.Post;
 import com.yukeon.wantedpreonboardingbackend.post.domain.repository.PostRepository;
 import com.yukeon.wantedpreonboardingbackend.post.dto.request.PostCreateRequest;
+import com.yukeon.wantedpreonboardingbackend.post.dto.response.PostsResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,5 +28,11 @@ public class PostService {
                 () -> new NoSuchMemberException()
         );
         postRepository.save(request.toEntity(member));
+    }
+
+    public PostsResponse findAll(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Post> allPost = postRepository.findAll(pageRequest);
+        return PostsResponse.of(allPost);
     }
 }
