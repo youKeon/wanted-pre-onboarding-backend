@@ -24,12 +24,15 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private boolean isDeleted;
+
     public Post(Member member,
                 String content,
                 String title) {
         this.member = member;
         this.content = content;
         this.title = title;
+        this.isDeleted = false;
     }
 
     public void update(String title, String content) {
