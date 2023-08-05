@@ -2,6 +2,9 @@ package com.yukeon.wantedpreonboardingbackend.global.error;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.yukeon.wantedpreonboardingbackend.member.exception.InvalidMemberException;
+import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
+import com.yukeon.wantedpreonboardingbackend.post.exception.NoSuchPostException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -39,17 +42,21 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-    @ExceptionHandler({})
+    @ExceptionHandler({
+            NoSuchMemberException.class,
+            NoSuchPostException.class})
     public ResponseEntity<ErrorResponse> handleNoSuchData(final RuntimeException e) {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-//    @ExceptionHandler({})
-//    public ResponseEntity<ErrorResponse> handleInvalidData(final RuntimeException e) {
-//        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
-//        return ResponseEntity.badRequest().body(errorResponse);
-//    }
+    @ExceptionHandler({
+            InvalidMemberException.class
+    })
+    public ResponseEntity<ErrorResponse> handleInvalidData(final RuntimeException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnexpectedException(final Exception e,
