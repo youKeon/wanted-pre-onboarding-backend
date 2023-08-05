@@ -1,7 +1,6 @@
-package com.yukeon.wantedpreonboardingbackend.auth.infra;
+package com.yukeon.wantedpreonboardingbackend.auth.jwt;
 
 import com.yukeon.wantedpreonboardingbackend.auth.application.CustomUserDetailsService;
-import com.yukeon.wantedpreonboardingbackend.auth.dto.response.TokenInfoResponse;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
@@ -25,51 +24,35 @@ import java.util.stream.Collectors;
 @Slf4j
 public class JwtTokenProvider {
 
-    private final long tokenExpiredTime; // 30분
+    private final long tokenExpiredTime;
     private final Key key;
     private CustomUserDetailsService customUserDetailsService;
 
 
-    public JwtTokenProvider(@Value("${security.jwt.access.expire-length}") long tokenExpiredTime,
-                            @Value("${security.jwt.access.secret-key}") String tokenSecretKey,
+    public JwtTokenProvider(@Value("${jwt.expire-length}") long tokenExpiredTime,
+                            @Value("${jwt.secret}") String secretKey,
                             CustomUserDetailsService customUserDetailsService) {
 
         this.tokenExpiredTime = tokenExpiredTime;
-        this.key = Keys.hmacShaKeyFor(tokenSecretKey.getBytes(StandardCharsets.UTF_8));
+        this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         this.customUserDetailsService = customUserDetailsService;
     }
 
-    public TokenInfoResponse generateToken(Authentication authentication) {
-        return generateToken(authentication.getName(), authentication.getAuthorities());
-    }
-
-    public TokenInfoResponse generateToken(String name, Collection<? extends GrantedAuthority> inputAuthorities) {
-        String authorities = inputAuthorities.stream()
+    public String generateToken(Authentication authentication) {
+        String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
 
-        // Access Token 생성
         Date accessTokenExpiresIn = new Date(now + tokenExpiredTime);
-        String accessToken = Jwts.builder()
-                .setSubject(name)
+
+        return Jwts.builder()
+                .setSubject(authentication.getName())
                 .claim("auth", authorities)
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
-
-        // Refresh Token 생성
-        String refreshToken = Jwts.builder()
-                .setExpiration(new Date(now + tokenExpiredTime))
-                .signWith(key, SignatureAlgorithm.HS512)
-                .compact();
-
-        return TokenInfoResponse.builder()
-                .grantType("Bearer")
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .build();
     }
 
     public Authentication getAuthentication(String accessToken) {
@@ -114,11 +97,5 @@ public class JwtTokenProvider {
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
-    }
-
-    public Long getExpiration(String accessToken) {
-        //accessToken 남은 유효시간
-        Date expiration = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody().getExpiration();
-        return (expiration.getTime() - System.currentTimeMillis());
     }
 }

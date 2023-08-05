@@ -5,7 +5,6 @@ import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
 import com.yukeon.wantedpreonboardingbackend.member.domain.repository.MemberRepository;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,13 +25,5 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private UserDetails createUserDetails(Member member) {
         return new MemberInfo(member);
-    }
-
-    public Member getLoginUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String email = ((UserDetails) principal).getUsername();
-        return memberRepository.findByEmail(email).orElseThrow(
-                () -> new NoSuchMemberException()
-        );
     }
 }

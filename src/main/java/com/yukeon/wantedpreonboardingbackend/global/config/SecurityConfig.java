@@ -1,7 +1,7 @@
 package com.yukeon.wantedpreonboardingbackend.global.config;
 
-import com.yukeon.wantedpreonboardingbackend.auth.infra.JwtFilter;
-import com.yukeon.wantedpreonboardingbackend.auth.infra.JwtTokenProvider;
+import com.yukeon.wantedpreonboardingbackend.auth.jwt.JwtFilter;
+import com.yukeon.wantedpreonboardingbackend.auth.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,9 +32,9 @@ public class SecurityConfig {
                 .cors().and()
 
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/signup",
-                        "/api/v1/auth/signin").permitAll()
-                .antMatchers("/api/v1/**").hasRole("USER")
+                .antMatchers("/api/v1/members/signup",
+                        "/api/v1/members/signin").permitAll()
+                .antMatchers("/api/v1/**").authenticated()
 
                 .and()
                 .sessionManagement()
