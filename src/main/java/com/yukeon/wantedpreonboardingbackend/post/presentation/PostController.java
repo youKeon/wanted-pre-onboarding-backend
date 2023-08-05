@@ -3,6 +3,7 @@ package com.yukeon.wantedpreonboardingbackend.post.presentation;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import com.yukeon.wantedpreonboardingbackend.post.application.PostService;
 import com.yukeon.wantedpreonboardingbackend.post.dto.request.PostCreateRequest;
+import com.yukeon.wantedpreonboardingbackend.post.dto.response.PostResponse;
 import com.yukeon.wantedpreonboardingbackend.post.dto.response.PostsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,10 @@ public class PostController {
 
         return postService.findAll(page - 1, size);
     }
-    
+
+    @GetMapping("/{id}")
+    public PostResponse find(@PathVariable Long id) {
+        return postService.find(id);
+    }
+
 }

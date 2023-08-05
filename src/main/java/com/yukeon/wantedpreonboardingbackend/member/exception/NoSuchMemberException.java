@@ -1,4 +1,4 @@
-package com.yukeon.wantedpreonboardingbackend.auth.exception;
+package com.yukeon.wantedpreonboardingbackend.member.exception;
 
 public class NoSuchMemberException extends RuntimeException {
     public NoSuchMemberException(final String message) {

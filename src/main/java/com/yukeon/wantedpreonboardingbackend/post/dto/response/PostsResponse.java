@@ -14,14 +14,14 @@ import java.util.stream.Collectors;
 public class PostsResponse {
     private long numberOfPosts;
     private boolean isLastPage;
-    private List<PostInfoResponse> postInfoResponses;
+    private List<PostResponse> postInfoResponses;
 
     public static PostsResponse of(Page<Post> posts) {
         return new PostsResponse(
                 posts.getTotalElements(),
                 posts.isLast(),
                 posts.stream()
-                        .map(post -> PostInfoResponse.from(post))
+                        .map(post -> PostResponse.from(post))
                         .collect(Collectors.toList())
         );
     }

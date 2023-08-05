@@ -6,11 +6,11 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class PostInfoResponse {
+public class PostResponse {
     private String title;
     private String content;
 
-    public static PostInfoResponse from(Post post) {
-        return new PostInfoResponse(post.getTitle(), post.getContent());
+    public static PostResponse from(Post post) {
+        return new PostResponse(post.getTitle(), post.getContent());
     }
 }

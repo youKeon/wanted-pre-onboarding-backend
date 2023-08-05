@@ -1,6 +1,6 @@
 package com.yukeon.wantedpreonboardingbackend.auth.application;
 
-import com.yukeon.wantedpreonboardingbackend.auth.exception.NoSuchMemberException;
+import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
 import com.yukeon.wantedpreonboardingbackend.member.domain.repository.MemberRepository;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
