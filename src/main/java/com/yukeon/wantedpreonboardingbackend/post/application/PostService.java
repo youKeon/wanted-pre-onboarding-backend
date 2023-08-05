@@ -7,6 +7,7 @@ import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import com.yukeon.wantedpreonboardingbackend.post.domain.Post;
 import com.yukeon.wantedpreonboardingbackend.post.domain.repository.PostRepository;
 import com.yukeon.wantedpreonboardingbackend.post.dto.request.PostCreateRequest;
+import com.yukeon.wantedpreonboardingbackend.post.dto.request.PostUpdateRequest;
 import com.yukeon.wantedpreonboardingbackend.post.dto.response.PostResponse;
 import com.yukeon.wantedpreonboardingbackend.post.dto.response.PostsResponse;
 import com.yukeon.wantedpreonboardingbackend.post.exception.NoSuchPostException;
@@ -32,6 +33,9 @@ public class PostService {
     public PostsResponse findAll(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<Post> allPost = postRepository.findAll(pageRequest);
+
+        if (allPost.getNumberOfElements() == 0) throw new NoSuchPostException();
+
         return PostsResponse.of(allPost);
     }
 
@@ -40,5 +44,12 @@ public class PostService {
                 () -> new NoSuchPostException()
         );
         return PostResponse.from(post);
+    }
+
+    public void update(Long id, PostUpdateRequest request) {
+        Post post = postRepository.findById(id).orElseThrow(
+                () -> new NoSuchPostException()
+        );
+        post.update(request.getTitle(), request.getContent());
     }
 }

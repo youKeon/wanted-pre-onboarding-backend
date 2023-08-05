@@ -3,6 +3,7 @@ package com.yukeon.wantedpreonboardingbackend.post.presentation;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import com.yukeon.wantedpreonboardingbackend.post.application.PostService;
 import com.yukeon.wantedpreonboardingbackend.post.dto.request.PostCreateRequest;
+import com.yukeon.wantedpreonboardingbackend.post.dto.request.PostUpdateRequest;
 import com.yukeon.wantedpreonboardingbackend.post.dto.response.PostResponse;
 import com.yukeon.wantedpreonboardingbackend.post.dto.response.PostsResponse;
 import lombok.RequiredArgsConstructor;
@@ -38,4 +39,9 @@ public class PostController {
         return postService.find(id);
     }
 
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id,
+                       @RequestBody PostUpdateRequest request) {
+        postService.update(id, request);
+    }
 }
