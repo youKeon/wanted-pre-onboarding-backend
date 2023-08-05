@@ -48,7 +48,7 @@ public class PostService {
     }
 
     public void update(Long id, MemberInfo memberInfo, PostUpdateRequest request) {
-        Post post = postRepository.findById(id).orElseThrow(
+        Post post = postRepository.findPostWithMember(id).orElseThrow(
                 () -> new NoSuchPostException()
         );
 
@@ -60,5 +60,20 @@ public class PostService {
             throw new InvalidMemberException("수정 권한이 없는 사용자입니다.");
 
         post.update(request.getTitle(), request.getContent());
+    }
+
+    public void delete(Long id, MemberInfo memberInfo) {
+        Post post = postRepository.findPostWithMember(id).orElseThrow(
+                () -> new NoSuchPostException()
+        );
+
+        Member member = memberRepository.findByEmail(memberInfo.getUsername()).orElseThrow(
+                () -> new NoSuchMemberException()
+        );
+
+        if (member.getId() != post.getMember().getId())
+            throw new InvalidMemberException("삭제 권한이 없는 사용자입니다.");
+
+        postRepository.delete(post);
     }
 }

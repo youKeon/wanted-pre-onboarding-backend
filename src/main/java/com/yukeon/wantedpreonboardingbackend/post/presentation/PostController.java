@@ -45,4 +45,10 @@ public class PostController {
                        @RequestBody PostUpdateRequest request) {
         postService.update(id, memberInfo, request);
     }
+
+    @DeleteMapping("/{id}")
+    public void update(@PathVariable Long id,
+                       @AuthenticationPrincipal MemberInfo memberInfo) {
+        postService.delete(id, memberInfo);
+    }
 }
