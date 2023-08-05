@@ -1,7 +1,7 @@
 package com.yukeon.wantedpreonboardingbackend.auth.infra;
 
 import com.yukeon.wantedpreonboardingbackend.auth.application.CustomUserDetailsService;
-import com.yukeon.wantedpreonboardingbackend.auth.dto.response.TokenInfo;
+import com.yukeon.wantedpreonboardingbackend.auth.dto.response.TokenInfoResponse;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
@@ -39,11 +39,11 @@ public class JwtTokenProvider {
         this.customUserDetailsService = customUserDetailsService;
     }
 
-    public TokenInfo generateToken(Authentication authentication) {
+    public TokenInfoResponse generateToken(Authentication authentication) {
         return generateToken(authentication.getName(), authentication.getAuthorities());
     }
 
-    public TokenInfo generateToken(String name, Collection<? extends GrantedAuthority> inputAuthorities) {
+    public TokenInfoResponse generateToken(String name, Collection<? extends GrantedAuthority> inputAuthorities) {
         String authorities = inputAuthorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
@@ -65,7 +65,7 @@ public class JwtTokenProvider {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
-        return TokenInfo.builder()
+        return TokenInfoResponse.builder()
                 .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
