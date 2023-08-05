@@ -45,11 +45,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler({})
-    public ResponseEntity<ErrorResponse> handleInvalidData(final RuntimeException e) {
-        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
-        return ResponseEntity.badRequest().body(errorResponse);
-    }
+//    @ExceptionHandler({})
+//    public ResponseEntity<ErrorResponse> handleInvalidData(final RuntimeException e) {
+//        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+//        return ResponseEntity.badRequest().body(errorResponse);
+//    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnexpectedException(final Exception e,
