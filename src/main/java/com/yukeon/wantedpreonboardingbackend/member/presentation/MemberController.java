@@ -7,6 +7,8 @@ import com.yukeon.wantedpreonboardingbackend.member.dto.response.MemberSignInRes
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/members")
@@ -15,12 +17,12 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public void signUp(@RequestBody MemberSignUpRequest request) {
+    public void signUp(@RequestBody @Valid MemberSignUpRequest request) {
         memberService.signUp(request);
     }
 
-    @GetMapping("/signin")
-    public MemberSignInResponse signIn(@RequestBody MemberSignInRequest request) {
+    @PostMapping("/signin")
+    public MemberSignInResponse signIn(@RequestBody @Valid MemberSignInRequest request) {
         return memberService.signIn(request);
     }
 }
