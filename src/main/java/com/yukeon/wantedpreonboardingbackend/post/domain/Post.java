@@ -2,6 +2,7 @@ package com.yukeon.wantedpreonboardingbackend.post.domain;
 
 import com.yukeon.wantedpreonboardingbackend.common.BaseEntity;
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
+import com.yukeon.wantedpreonboardingbackend.member.exception.InvalidMemberException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +30,10 @@ public class Post extends BaseEntity {
     public Post(Member member,
                 String content,
                 String title) {
+
+        validateContent(content);
+        validateTitle(title);
+        
         this.member = member;
         this.content = content;
         this.title = title;
@@ -38,5 +43,17 @@ public class Post extends BaseEntity {
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    private void validateContent(String content) {
+        if (content.length() == 0) {
+            throw new InvalidMemberException("Content는 공백일 수 없습니다.");
+        }
+    }
+
+    private void validateTitle(String title) {
+        if (title.length() == 0) {
+            throw new InvalidMemberException("Title은 공백일 수 없습니다.");
+        }
     }
 }
