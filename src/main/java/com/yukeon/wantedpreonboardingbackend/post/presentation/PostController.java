@@ -45,7 +45,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public void update(@PathVariable Long id,
+    public void delete(@PathVariable Long id,
                        @AuthenticationPrincipal MemberInfo memberInfo) {
         postService.delete(id, memberInfo);
     }

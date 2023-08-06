@@ -7,9 +7,6 @@ import com.yukeon.wantedpreonboardingbackend.member.dto.request.MemberSignInRequ
 import com.yukeon.wantedpreonboardingbackend.member.dto.request.MemberSignUpRequest;
 import com.yukeon.wantedpreonboardingbackend.member.dto.response.MemberSignInResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
     public void signUp(MemberSignUpRequest request) {
         String encodedPassword = passwordEncoder.encode(request.getPassword());
@@ -30,14 +26,7 @@ public class MemberService {
     }
 
     public MemberSignInResponse signIn(MemberSignInRequest request) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                request.getEmail(), request.getPassword()
-        );
-
-        Authentication authentication = authenticationManagerBuilder.getObject()
-                .authenticate(authenticationToken);
-
-        String accessToken = jwtTokenProvider.generateToken(authentication);
+        String accessToken = jwtTokenProvider.generateToken(request.getEmail());
         return MemberSignInResponse.from(accessToken);
     }
 }
