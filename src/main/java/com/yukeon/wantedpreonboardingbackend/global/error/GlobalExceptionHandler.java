@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.yukeon.wantedpreonboardingbackend.member.exception.InvalidMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
+import com.yukeon.wantedpreonboardingbackend.post.exception.InvalidPostException;
 import com.yukeon.wantedpreonboardingbackend.post.exception.NoSuchPostException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({
-            InvalidMemberException.class
+            InvalidMemberException.class,
+            InvalidPostException.class
     })
     public ResponseEntity<ErrorResponse> handleInvalidData(final RuntimeException e) {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());

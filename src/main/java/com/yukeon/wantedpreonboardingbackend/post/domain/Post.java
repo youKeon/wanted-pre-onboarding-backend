@@ -33,7 +33,7 @@ public class Post extends BaseEntity {
 
         validateContent(content);
         validateTitle(title);
-        
+
         this.member = member;
         this.content = content;
         this.title = title;
@@ -47,13 +47,13 @@ public class Post extends BaseEntity {
 
     private void validateContent(String content) {
         if (content.length() == 0) {
-            throw new InvalidMemberException("Content는 공백일 수 없습니다.");
+            throw new InvalidPostException("Content는 공백일 수 없습니다.");
         }
     }
 
     private void validateTitle(String title) {
         if (title.length() == 0) {
-            throw new InvalidMemberException("Title은 공백일 수 없습니다.");
+            throw new InvalidPostException("Title은 공백일 수 없습니다.");
         }
     }
 }
