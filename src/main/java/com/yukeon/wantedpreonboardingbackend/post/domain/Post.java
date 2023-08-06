@@ -3,6 +3,7 @@ package com.yukeon.wantedpreonboardingbackend.post.domain;
 import com.yukeon.wantedpreonboardingbackend.common.BaseEntity;
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
 import com.yukeon.wantedpreonboardingbackend.member.exception.InvalidMemberException;
+import com.yukeon.wantedpreonboardingbackend.post.exception.InvalidPostException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
