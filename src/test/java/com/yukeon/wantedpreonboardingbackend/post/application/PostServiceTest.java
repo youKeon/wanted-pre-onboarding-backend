@@ -47,6 +47,7 @@ public class PostServiceTest {
     private PostRepository postRepository;
     @Mock
     private MemberRepository memberRepository;
+
     private static Pageable pageable = PageRequest.of(0, 3);
     private Member member;
     private MemberInfo memberInfo;
