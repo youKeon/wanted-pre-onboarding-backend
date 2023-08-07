@@ -1,0 +1,83 @@
+ifndef::snippets[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:sectnums:
+:docinfo: shared-head
+:snippets: ./build/generated-snippets
+endif::[]
+
+= Member API
+
+== 1. 회원가입
+
+=== 1-1. 성공
+
+==== Request
+include::{snippets}/member/signUp/success/http-request.adoc[]
+
+==== Request Field
+include::{snippets}/member/signUp/success/request-fields.adoc[]
+
+==== Response
+include::{snippets}/member/signUp/success/http-response.adoc[]
+
+=== 1-2. 실패
+==== 1-2-1. 이메일 형식이 올바르지 않은 경우
+==== Request
+include::{snippets}/member/signUp/fail/invalidEmail/http-request.adoc[]
+
+==== Response
+include::{snippets}/member/signUp/fail/invalidEmail/http-response.adoc[]
+
+==== 1-2-2. 비밀번호가 8글자 이상이 아닌 경우
+==== Request
+include::{snippets}/member/signUp/fail/invalidPassword/http-request.adoc[]
+
+==== Response
+include::{snippets}/member/signUp/fail/invalidPassword/http-response.adoc[]
+
+==== 1-2-3. 비밀번호가 공백인 경우
+==== Request
+include::{snippets}/member/signUp/fail/emptyPassword/http-request.adoc[]
+
+==== Response
+include::{snippets}/member/signUp/fail/emptyPassword/http-response.adoc[]
+
+== 2. 로그인
+
+=== 2-1. 성공
+
+==== Request
+include::{snippets}/member/signIn/success/http-request.adoc[]
+
+==== Request Field
+include::{snippets}/member/signIn/success/request-fields.adoc[]
+
+==== Response
+include::{snippets}/member/signIn/success/http-response.adoc[]
+
+=== 2-2. 실패
+==== 2-2-1. 이메일 형식이 올바르지 않은 경우
+==== Request
+include::{snippets}/member/signIn/fail/invalidEmail/http-request.adoc[]
+
+==== Response
+include::{snippets}/member/signIn/fail/invalidEmail/http-response.adoc[]
+
+==== 2-2-2. 비밀번호가 8글자 이상이 아닌 경우
+==== Request
+include::{snippets}/member/signIn/fail/invalidPassword/http-request.adoc[]
+
+==== Response
+include::{snippets}/member/signIn/fail/invalidPassword/http-response.adoc[]
+
+==== 2-2-3. 비밀번호가 공백인 경우
+==== Request
+include::{snippets}/member/signIn/fail/emptyPassword/http-request.adoc[]
+
+==== Response
+include::{snippets}/member/signIn/fail/emptyPassword/http-response.adoc[]
