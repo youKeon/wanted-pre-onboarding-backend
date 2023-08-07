@@ -10,11 +10,12 @@ import com.yukeon.wantedpreonboardingbackend.post.domain.Post;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.Locale;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
@@ -70,12 +71,13 @@ public class MemberControllerTest extends ControllerTest {
     @DisplayName("잘못된 이메일 형식으로 회원가입을 할 수 없다")
     public void signUpWithInvalidEmailFormatTest() throws Exception {
         // given
-        MemberSignUpRequest request = new MemberSignUpRequest("이메에에에에일", member.getPassword());
+        MemberSignUpRequest request = new MemberSignUpRequest("invalidEmail", member.getPassword());
 
         // when, then
         mockMvc.perform(post(baseURL + "/signup")
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
+                        .locale(new Locale("ko", "KR"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
@@ -103,6 +105,7 @@ public class MemberControllerTest extends ControllerTest {
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .locale(new Locale("ko", "KR"))
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
                 .andDo(print())
