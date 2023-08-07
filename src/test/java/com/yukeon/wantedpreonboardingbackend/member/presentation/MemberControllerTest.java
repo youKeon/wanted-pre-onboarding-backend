@@ -10,15 +10,19 @@ import com.yukeon.wantedpreonboardingbackend.post.domain.Post;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.mockito.Mockito;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 public class MemberControllerTest extends ControllerTest {
     private static final String baseURL = "/api/v1/members";
@@ -51,7 +55,14 @@ public class MemberControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("member/signUp/success",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                        )
+                ));
     }
 
     @Test
@@ -67,13 +78,23 @@ public class MemberControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("member/signUp/fail/invalidEmail",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));
     }
 
     @Test
     @WithMockUser
     @DisplayName("비밀번호가 8글자 이상이 안 되면 회원가입을 할 수 없다")
-    public void signUpWithInvalidPasswordFormatTest() throws Exception {
+    public void signUpWithfailPasswordFormatTest() throws Exception {
         // given
         MemberSignUpRequest request = new MemberSignUpRequest(member.getEmail(), "123");
 
@@ -83,7 +104,17 @@ public class MemberControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("member/signUp/fail/invalidPassword",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));
     }
 
     @Test
@@ -99,7 +130,17 @@ public class MemberControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("member/signUp/fail/emptyPassword",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));
     }
 
     @Test
@@ -111,19 +152,29 @@ public class MemberControllerTest extends ControllerTest {
         MemberSignInResponse response = new MemberSignInResponse("accessToken");
 
         // when, then
-        when(memberService.signIn(request)).thenReturn(response);
+        when(memberService.signIn(any(MemberSignInRequest.class))).thenReturn(response);
         mockMvc.perform(post(baseURL + "/signin")
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("member/signIn/success",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("accessToken").type(JsonFieldType.STRING).description("ACCESS 토큰")
+                        )
+                ));
     }
 
     @Test
     @WithMockUser
     @DisplayName("잘못된 이메일 형식으로 로그인 할 수 없다")
-    public void signInWithInvalidEmailFormatTest() throws Exception {
+    public void signInWithfailEmailFormatTest() throws Exception {
         // given
         MemberSignInRequest request = new MemberSignInRequest("이메에에에에일", member.getPassword());
 
@@ -133,13 +184,23 @@ public class MemberControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("member/signIn/fail/invalidEmail",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));
     }
 
     @Test
     @WithMockUser
     @DisplayName("비밀번호가 8글자 이상이 안 되면 로그인을 할 수 없다")
-    public void signInWithInvalidPasswordFormatTest() throws Exception {
+    public void signInWithfailPasswordFormatTest() throws Exception {
         // given
         MemberSignInRequest request = new MemberSignInRequest(member.getEmail(), "123");
 
@@ -149,7 +210,17 @@ public class MemberControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("member/signIn/fail/invalidPassword",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));
     }
 
     @Test
@@ -165,6 +236,16 @@ public class MemberControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("member/signIn/fail/emptyPassword",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));
     }
 }
