@@ -81,12 +81,6 @@ include::{snippets}/post/update/fail/unauthorizedMember/http-request.adoc[]
 ==== Response
 include::{snippets}/post/update/fail/unauthorizedMember/http-response.adoc[]
 
-==== 3-2-2. 수정 권한이 없는 경우
-==== Request
-include::{snippets}/post/update/fail/unauthorizedMember/http-request.adoc[]
-
-==== Response
-include::{snippets}/post/update/fail/unauthorizedMember/http-response.adoc[]
 
 == 4. 게시글 삭제
 
@@ -110,9 +104,3 @@ include::{snippets}/post/delete/fail/unauthorizedMember/http-request.adoc[]
 ==== Response
 include::{snippets}/post/delete/fail/unauthorizedMember/http-response.adoc[]
 
-==== 4-2-2. 삭제 권한이 없는 경우
-==== Request
-include::{snippets}/post/delete/fail/unauthorizedMember/http-request.adoc[]
-
-==== Response
-include::{snippets}/post/delete/fail/unauthorizedMember/http-response.adoc[]
