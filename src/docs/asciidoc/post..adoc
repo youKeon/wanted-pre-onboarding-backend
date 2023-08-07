@@ -1,106 +1,115 @@
 = Post API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs // 코드들의 하이라이팅을 highlightjs를 사용
+:toc: left // Table Of Contents(목차)를 문서의 좌측에 두기
+:toclevels: 2 // 목차 레벨 설정
+:sectlinks:
+:sectnums: // 분류별 자동으로 숫자를 달아줌
+:docinfo: shared-head
+:snippets: ./build/generated-snippets
 
-== 1. 게시글 등록
+== 게시글 등록
 
-=== 1-1. 성공
+=== 성공
 
-==== Request
+*Request*
 include::{snippets}/post/create/success/http-request.adoc[]
 
-==== Request Field
+*Request Field*
 include::{snippets}/post/create/success/request-fields.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/create/success/http-response.adoc[]
 
 
-=== 1-2. 실패
-==== 1-2-1. 사용자 인증이 안 된 경우
-==== Request
+=== 실패
+==== 사용자 인증이 안 된 경우
+*Request*
 include::{snippets}/post/create/fail/unauthorizedMember/http-request.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/create/fail/unauthorizedMember/http-response.adoc[]
 
-==== 1-2-2. Title(제목)이 없는 경우
-==== Request
+==== Title(제목)이 없는 경우
+*Request*
 include::{snippets}/post/create/fail/emptyTitle/http-request.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/create/fail/emptyTitle/http-response.adoc[]
 
-==== 1-2-3. Content(내용)이 없는 경우
-==== Request
+==== Content(내용)이 없는 경우
+*Request*
 include::{snippets}/post/create/fail/emptyContent/http-request.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/create/fail/emptyContent/http-response.adoc[]
 
 
-== 2. 게시글 조회
+== 게시글 조회
 
 === 2-1. 성공
 
-==== Request
+*Request*
 include::{snippets}/post/find/success/http-request.adoc[]
 
-==== Request Field
+*Request Field*
 include::{snippets}/post/find/success/path-parameters.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/find/success/http-response.adoc[]
 
 
-=== 2-2. 실패
-==== 2-2-1. 사용자 인증이 안 된 경우
-==== Request
+=== 실패
+==== 사용자 인증이 안 된 경우
+*Request*
 include::{snippets}/post/find/fail/unauthorizedMember/http-request.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/find/fail/unauthorizedMember/http-response.adoc[]
 
-== 3. 게시글 수정
+== 게시글 수정
 
-=== 3-1. 성공
+=== 성공
 
-==== Request
+*Request*
 include::{snippets}/post/update/success/http-request.adoc[]
 
-==== Request Field
+*Request Field*
 include::{snippets}/post/update/success/request-fields.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/update/success/http-response.adoc[]
 
 
-=== 3-2. 실패
-==== 3-2-1. 사용자 인증이 안 된 경우
-==== Request
+=== 실패
+==== 사용자 인증이 안 된 경우
+*Request*
 include::{snippets}/post/update/fail/unauthorizedMember/http-request.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/update/fail/unauthorizedMember/http-response.adoc[]
 
 
-== 4. 게시글 삭제
+== 게시글 삭제
 
-=== 4-1. 성공
+=== 성공
 
-==== Request
+*Request*
 include::{snippets}/post/delete/success/http-request.adoc[]
 
-==== Request Field
+*Request Field*
 include::{snippets}/post/delete/success/path-parameters.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/delete/success/http-response.adoc[]
 
 
-=== 4-2. 실패
-==== 4-2-1. 사용자 인증이 안 된 경우
-==== Request
+=== 실패
+==== 사용자 인증이 안 된 경우
+*Request*
 include::{snippets}/post/delete/fail/unauthorizedMember/http-request.adoc[]
 
-==== Response
+*Response*
 include::{snippets}/post/delete/fail/unauthorizedMember/http-response.adoc[]
 
