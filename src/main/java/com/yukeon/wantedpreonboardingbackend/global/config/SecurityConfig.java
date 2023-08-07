@@ -1,5 +1,7 @@
 package com.yukeon.wantedpreonboardingbackend.global.config;
 
+import com.yukeon.wantedpreonboardingbackend.auth.jwt.JwtAccessDeniedHandler;
+import com.yukeon.wantedpreonboardingbackend.auth.jwt.JwtAuthenticationEntryPoint;
 import com.yukeon.wantedpreonboardingbackend.auth.jwt.JwtFilter;
 import com.yukeon.wantedpreonboardingbackend.auth.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -26,22 +30,28 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
+        httpSecurity
                 .httpBasic().disable()
                 .csrf().disable()
-                .cors().and()
+                .cors()
 
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+
+                .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/members/signup",
-                        "/api/v1/members/signin").permitAll()
-                .antMatchers("/api/v1/**").authenticated()
+                .antMatchers("/api/v1/members/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .anyRequest().authenticated()
 
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
-                .addFilterBefore(new JwtFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .apply(new JwtSecurityConfig(jwtTokenProvider));
+
+        return httpSecurity.build();
     }
 }
