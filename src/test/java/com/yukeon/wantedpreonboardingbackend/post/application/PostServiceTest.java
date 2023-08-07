@@ -1,8 +1,8 @@
 package com.yukeon.wantedpreonboardingbackend.post.application;
 
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
-import com.yukeon.wantedpreonboardingbackend.member.exception.InvalidMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
+import com.yukeon.wantedpreonboardingbackend.member.exception.UnAuthorizedMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.persistence.MemberRepository;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import com.yukeon.wantedpreonboardingbackend.post.domain.Post;
@@ -223,7 +223,7 @@ public class PostServiceTest {
 
         assertThatThrownBy(
                 () -> postService.update(post1.getId(), memberInfo, request))
-                .isInstanceOf(InvalidMemberException.class)
+                .isInstanceOf(UnAuthorizedMemberException.class)
                 .hasMessageContaining("수정 권한이 없는 사용자입니다.");
     }
 
@@ -278,7 +278,7 @@ public class PostServiceTest {
 
         assertThatThrownBy(
                 () -> postService.delete(post1.getId(), memberInfo))
-                .isInstanceOf(InvalidMemberException.class)
+                .isInstanceOf(UnAuthorizedMemberException.class)
                 .hasMessageContaining("삭제 권한이 없는 사용자입니다.");
     }
 }

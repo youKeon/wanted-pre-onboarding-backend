@@ -1,8 +1,8 @@
 package com.yukeon.wantedpreonboardingbackend.post.application;
 
-import com.yukeon.wantedpreonboardingbackend.member.exception.InvalidMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
+import com.yukeon.wantedpreonboardingbackend.member.exception.UnAuthorizedMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.persistence.MemberRepository;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import com.yukeon.wantedpreonboardingbackend.post.domain.Post;
@@ -15,6 +15,7 @@ import com.yukeon.wantedpreonboardingbackend.post.exception.NoSuchPostException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,7 +58,7 @@ public class PostService {
         );
 
         if (member.getId() != post.getMember().getId())
-            throw new InvalidMemberException("수정 권한이 없는 사용자입니다.");
+            throw new UnAuthorizedMemberException("수정 권한이 없는 사용자입니다.", HttpStatus.FORBIDDEN);
 
         post.update(request.getTitle(), request.getContent());
     }
@@ -72,7 +73,7 @@ public class PostService {
         );
 
         if (member.getId() != post.getMember().getId())
-            throw new InvalidMemberException("삭제 권한이 없는 사용자입니다.");
+            throw new UnAuthorizedMemberException("삭제 권한이 없는 사용자입니다.", HttpStatus.FORBIDDEN);
 
         postRepository.delete(post);
     }

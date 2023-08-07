@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.yukeon.wantedpreonboardingbackend.member.exception.InvalidMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
+import com.yukeon.wantedpreonboardingbackend.member.exception.UnAuthorizedMemberException;
 import com.yukeon.wantedpreonboardingbackend.post.exception.InvalidPostException;
 import com.yukeon.wantedpreonboardingbackend.post.exception.NoSuchPostException;
 import org.slf4j.Logger;
@@ -58,6 +59,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorResponse> handleInvalidData(final RuntimeException e) {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(UnAuthorizedMemberException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidMember(final UnAuthorizedMemberException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(e.getHttpStatus()).body(errorResponse);
     }
 
     @ExceptionHandler(Exception.class)
