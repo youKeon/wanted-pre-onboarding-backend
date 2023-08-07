@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/psq
+    url: jdbc:mysql://localhost:3306/wanted
     username: root
-    password:
+    password: d4594283!
 
   jpa:
     hibernate:
@@ -14,7 +14,18 @@ spring:
         show_sql: true
     database: mysql
 
+
+
 logging:
   level:
     org.springframework.web : debug
     org.hibernate.type.descriptor.sql: trace
+
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHaVlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+  expire-length: 3600000
+
+springdoc:
+  swagger-ui:
+    version: v1.0
+  packages-to-scan: com.yukeon.wantedpreonboardingbackend
