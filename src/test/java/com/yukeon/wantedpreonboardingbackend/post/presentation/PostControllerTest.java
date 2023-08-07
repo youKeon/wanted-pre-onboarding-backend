@@ -24,8 +24,15 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.util.List;
 
 import static org.mockito.BDDMockito.*;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class PostControllerTest extends ControllerTest {
@@ -59,7 +66,17 @@ public class PostControllerTest extends ControllerTest {
 
         //then
         mockMvc.perform(get(baseURL + "/{id}", post1.getId()))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post/find/success",
+                        pathParameters(
+                                parameterWithName("id").description("게시글 ID")
+                        ),
+                        responseFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        )
+                ));
     }
 
     @Test
@@ -74,7 +91,12 @@ public class PostControllerTest extends ControllerTest {
 
         //then
         mockMvc.perform(get(baseURL + "/{id}", post1.getId()))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andDo(document("post/find/fail/unauthorizedMember",
+                        pathParameters(
+                                parameterWithName("id").description("게시글 ID")
+                        )
+                ));
     }
 
     @Test
@@ -90,7 +112,14 @@ public class PostControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post/create/success",
+                        requestFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        )
+                ));
     }
 
     @Test
@@ -106,7 +135,14 @@ public class PostControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andDo(print())
+                .andDo(document("post/create/fail/unauthorizedMember",
+                        requestFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        )
+                ));
     }
 
     @Test
@@ -122,7 +158,17 @@ public class PostControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("post/create/fail/emptyTitle",
+                        requestFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));;
     }
 
     @Test
@@ -138,7 +184,17 @@ public class PostControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("post/create/fail/emptyContent",
+                        requestFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));;
     }
 
     @Test
@@ -154,7 +210,17 @@ public class PostControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post/update/success",
+                        pathParameters(
+                                parameterWithName("id").description("게시글 ID")
+                        ),
+                        requestFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        )
+                ));
     }
 
     @Test
@@ -170,7 +236,17 @@ public class PostControllerTest extends ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andDo(print())
+                .andDo(document("post/update/fail/unauthorizedMember",
+                        pathParameters(
+                                parameterWithName("id").description("게시글 ID")
+                        ),
+                        requestFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        )
+                ));
     }
 
     @Test
@@ -179,8 +255,14 @@ public class PostControllerTest extends ControllerTest {
     public void deletePostByAuthorizedMember() throws Exception {
         //when, then
         mockMvc.perform(delete(baseURL + "/{id}", post1.getId())
-                        .with(csrf()))
-                .andExpect(status().isOk());
+                .with(csrf()))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post/delete/success",
+                        pathParameters(
+                                parameterWithName("id").description("게시글 ID")
+                        )
+                ));
     }
 
     @Test
@@ -190,7 +272,13 @@ public class PostControllerTest extends ControllerTest {
         //when, then
         mockMvc.perform(delete(baseURL + "/{id}", post1.getId())
                         .with(csrf()))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andDo(print())
+                .andDo(document("post/delete/fail/unauthorizedMember",
+                        pathParameters(
+                                parameterWithName("id").description("게시글 ID")
+                        )
+                ));
     }
 
     @Test
@@ -206,14 +294,20 @@ public class PostControllerTest extends ControllerTest {
 
         // when, then
         mockMvc.perform(get(baseURL)
-                        .with(csrf())
                         .param("page", String.valueOf(page))
                         .param("size", String.valueOf(size))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.numberOfPosts").value(postPage.getTotalElements()))
                 .andExpect(jsonPath("$.isLastPage").value(postPage.isLast()))
-                .andExpect(jsonPath("$.postInfoResponses", Matchers.hasSize(3)));
+                .andExpect(jsonPath("$.postInfoResponses", Matchers.hasSize(3)))
+                .andDo(print())
+                .andDo(document("post/findAll/success",
+                        requestParameters(
+                                parameterWithName("page").description("페이지"),
+                                parameterWithName("size").description("사이즈")
+                        )
+                ));
     }
 
     @Test
@@ -226,9 +320,15 @@ public class PostControllerTest extends ControllerTest {
 
         // when, then
         mockMvc.perform(get(baseURL)
-                .with(csrf())
                 .param("page", String.valueOf(page))
                 .param("size", String.valueOf(size)))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andDo(print())
+                .andDo(document("post/findAll/success",
+                        requestParameters(
+                                parameterWithName("page").description("페이지"),
+                                parameterWithName("size").description("사이즈")
+                        )
+                ));
     }
 }

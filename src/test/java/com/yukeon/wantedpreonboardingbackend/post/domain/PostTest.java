@@ -1,7 +1,6 @@
 package com.yukeon.wantedpreonboardingbackend.post.domain;
 
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
-import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import com.yukeon.wantedpreonboardingbackend.post.exception.InvalidPostException;
 import org.junit.jupiter.api.BeforeEach;
