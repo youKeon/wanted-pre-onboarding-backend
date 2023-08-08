@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.web.servlet.MockMvc;
 
 
@@ -23,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
         MemberController.class,
         })
 @AutoConfigureRestDocs
+@Profile("test")
 public abstract class ControllerTest {
     @Autowired
     protected MockMvc mockMvc;

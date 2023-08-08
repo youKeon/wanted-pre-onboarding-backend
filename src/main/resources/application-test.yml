@@ -15,3 +15,12 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHaVlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+  expire-length: 3600000
+
+springdoc:
+  swagger-ui:
+    version: v1.0
+  packages-to-scan: com.yukeon.wantedpreonboardingbackend

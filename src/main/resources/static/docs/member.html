@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=308b4c9c-70b1-470f-a619-b75838c172a1 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=cd95301c-69a3-42ee-a4b2-f0d750be9bc8 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 52
@@ -534,13 +534,14 @@ X-Frame-Options: DENY</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=bd68a428-c063-49ba-b046-ccbeee1eea41 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=fe6f84cc-0716-42f3-89d2-54356a8a0677 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
-Content-Length: 55
+Content-Length: 46
+Accept-Language: ko-kr
 Host: localhost:8080
 
-{"email":"이메에에에에일","password":"12345678"}</code></pre>
+{"email":"invalidEmail","password":"12345678"}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -556,9 +557,9 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 104
+Content-Length: 112
 
-{"message":"email 필드는 must be a well-formed email address (전달된 값: 이메에에에에일)"}</code></pre>
+{"message":"email 필드는 올바른 형식의 이메일 주소여야 합니다 (전달된 값: invalidEmail)"}</code></pre>
 </div>
 </div>
 </div>
@@ -569,10 +570,11 @@ Content-Length: 104
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=441960f7-93e6-476c-a135-bc5c36268302 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=8a3d20ed-a62c-41ca-9573-f5a1189043df HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 47
+Accept-Language: ko-kr
 Host: localhost:8080
 
 {"email":"yukeon97@gmail.com","password":"123"}</code></pre>
@@ -591,9 +593,9 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 91
+Content-Length: 105
 
-{"message":"password 필드는 size must be between 8 and 2147483647 (전달된 값: 123)"}</code></pre>
+{"message":"password 필드는 크기가 8에서 2147483647 사이여야 합니다 (전달된 값: 123)"}</code></pre>
 </div>
 </div>
 </div>
@@ -604,7 +606,7 @@ Content-Length: 91
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=cc205a67-96ff-4cb0-94cf-e7c3a574fdd0 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=47f6a8bc-3b45-4b35-bfc6-3dd80bfb2504 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 44
@@ -645,7 +647,7 @@ Content-Length: 78
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=dd6435c7-62b1-4644-a232-09a1047fb501 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=1cfba9b7-b35b-4d40-a197-5a4d712a4853 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 52
@@ -711,7 +713,7 @@ Content-Length: 29
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=dc573c9b-580d-4bef-9bee-68c3c573261e HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=5dee0b39-faa6-4fe9-b1ac-21e452ccb73a HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 55
@@ -746,7 +748,7 @@ Content-Length: 104
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=3d32a2cf-48af-44b4-9a50-7c93e620cb40 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=a6c89ea1-840c-4147-a902-a36926a9f8a4 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 47
@@ -781,7 +783,7 @@ Content-Length: 91
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=e59fdcee-0c8c-4c63-91d0-63f78a211cd7 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=12d91a01-46cf-465a-aea5-66cc706c55f3 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 44
@@ -803,9 +805,9 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 88
+Content-Length: 78
 
-{"message":"password 필드는 size must be between 8 and 2147483647 (전달된 값: )"}</code></pre>
+{"message":"password 필드는 공백일 수 없습니다. (전달된 값: )"}</code></pre>
 </div>
 </div>
 </div>

@@ -48,7 +48,7 @@ include::{snippets}/post/create/fail/emptyContent/http-response.adoc[]
 
 == 게시글 조회
 
-=== 2-1. 성공
+=== 성공
 
 *Request*
 include::{snippets}/post/find/success/http-request.adoc[]
