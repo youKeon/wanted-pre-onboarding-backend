@@ -16,6 +16,11 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    @GetMapping
+    public String test() {
+        return "Hello world!";
+    }
+
     @PostMapping("/signup")
     public void signUp(@RequestBody @Valid MemberSignUpRequest request) {
         memberService.signUp(request);
