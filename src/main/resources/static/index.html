@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Member API</title>
+<title>wanted-pre-onboarding-backend API Docs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,25 +437,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="book">
+<body class="book toc2 toc-left">
 <div id="header">
-<h1>Member API</h1>
+<h1>wanted-pre-onboarding-backend API Docs</h1>
 <div class="details">
 <span id="revnumber">version 0.0.1-SNAPSHOT</span>
 </div>
-<div id="toc" class="toc">
+<div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_회원가입">1. 회원가입</a>
+<li><a href="#_member_api">Member API</a>
 <ul class="sectlevel2">
-<li><a href="#_성공">1.1. 성공</a></li>
-<li><a href="#_실패">1.2. 실패</a></li>
+<li><a href="#_1_회원가입">1. 회원가입</a></li>
+<li><a href="#_2_로그인">2. 로그인</a></li>
 </ul>
 </li>
-<li><a href="#_로그인">2. 로그인</a>
+<li><a href="#_post_api">Post API</a>
 <ul class="sectlevel2">
-<li><a href="#_성공_2">2.1. 성공</a></li>
-<li><a href="#_실패_2">2.2. 실패</a></li>
+<li><a href="#_1_게시글_생성">1. 게시글 생성</a></li>
+<li><a href="#_2_게시글_조회">2. 게시글 조회</a></li>
+<li><a href="#_3_게시글_수정">3. 게시글 수정</a></li>
+<li><a href="#_4_게시글_삭제">4. 게시글 삭제</a></li>
 </ul>
 </li>
 </ul>
@@ -463,16 +465,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_회원가입"><a class="link" href="#_회원가입">1. 회원가입</a></h2>
+<h2 id="_member_api"><a class="link" href="#_member_api">Member API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_성공"><a class="link" href="#_성공">1.1. 성공</a></h3>
+<h3 id="_1_회원가입"><a class="link" href="#_1_회원가입">1. 회원가입</a></h3>
+<div class="sect3">
+<h4 id="_1_1_성공"><a class="link" href="#_1_1_성공">1.1. 성공</a></h4>
 <div class="paragraph">
 <p><strong>Request</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=ad328671-9321-40ce-bffb-5275047d0049 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/members/signup?_csrf=ad328671-9321-40ce-bffb-5275047d0049 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 52
@@ -515,7 +519,7 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
@@ -525,16 +529,16 @@ X-Frame-Options: DENY</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_실패"><a class="link" href="#_실패">1.2. 실패</a></h3>
 <div class="sect3">
-<h4 id="_이메일_형식이_올바르지_않은_경우"><a class="link" href="#_이메일_형식이_올바르지_않은_경우">1.2.1. 이메일 형식이 올바르지 않은 경우</a></h4>
+<h4 id="_1_2_실패"><a class="link" href="#_1_2_실패">1.2. 실패</a></h4>
+<div class="sect4">
+<h5 id="_1_2_1_이메일_형식이_올바르지_않은_경우"><a class="link" href="#_1_2_1_이메일_형식이_올바르지_않은_경우">1.2.1. 이메일 형식이 올바르지 않은 경우</a></h5>
 <div class="paragraph">
 <p><strong>Request</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=20e8c6e3-401e-4cc9-96bc-54b349a649de HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/members/signup?_csrf=20e8c6e3-401e-4cc9-96bc-54b349a649de HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 46
@@ -549,7 +553,7 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 400 Bad Request
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -563,14 +567,14 @@ Content-Length: 112
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_비밀번호가_8글자_이상이_아닌_경우"><a class="link" href="#_비밀번호가_8글자_이상이_아닌_경우">1.2.2. 비밀번호가 8글자 이상이 아닌 경우</a></h4>
+<div class="sect4">
+<h5 id="_1_2_2_비밀번호가_8글자_이상이_아닌_경우"><a class="link" href="#_1_2_2_비밀번호가_8글자_이상이_아닌_경우">1.2.2. 비밀번호가 8글자 이상이 아닌 경우</a></h5>
 <div class="paragraph">
 <p><strong>Request</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=c1aadf2b-48f9-4314-986d-06035448bf50 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/members/signup?_csrf=c1aadf2b-48f9-4314-986d-06035448bf50 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 47
@@ -585,7 +589,7 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 400 Bad Request
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -599,14 +603,14 @@ Content-Length: 105
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_비밀번호가_공백인_경우"><a class="link" href="#_비밀번호가_공백인_경우">1.2.3. 비밀번호가 공백인 경우</a></h4>
+<div class="sect4">
+<h5 id="_1_2_3_비밀번호가_공백인_경우"><a class="link" href="#_1_2_3_비밀번호가_공백인_경우">1.2.3. 비밀번호가 공백인 경우</a></h5>
 <div class="paragraph">
 <p><strong>Request</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signup?_csrf=8687a3f9-46e3-4385-bc04-f0dbb02dc260 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/members/signup?_csrf=8687a3f9-46e3-4385-bc04-f0dbb02dc260 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 44
@@ -620,7 +624,7 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 400 Bad Request
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -636,18 +640,16 @@ Content-Length: 78
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_로그인"><a class="link" href="#_로그인">2. 로그인</a></h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_성공_2"><a class="link" href="#_성공_2">2.1. 성공</a></h3>
+<h3 id="_2_로그인"><a class="link" href="#_2_로그인">2. 로그인</a></h3>
+<div class="sect3">
+<h4 id="_2_1_성공"><a class="link" href="#_2_1_성공">2.1. 성공</a></h4>
 <div class="paragraph">
 <p><strong>Request</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=5b7e891e-c657-4560-95fa-b7d9d72de5f2 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/members/signin?_csrf=5b7e891e-c657-4560-95fa-b7d9d72de5f2 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 52
@@ -690,7 +692,7 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -704,16 +706,16 @@ Content-Length: 29
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_실패_2"><a class="link" href="#_실패_2">2.2. 실패</a></h3>
 <div class="sect3">
-<h4 id="_이메일_형식이_올바르지_않은_경우_2"><a class="link" href="#_이메일_형식이_올바르지_않은_경우_2">2.2.1. 이메일 형식이 올바르지 않은 경우</a></h4>
+<h4 id="_2_2_실패"><a class="link" href="#_2_2_실패">2.2. 실패</a></h4>
+<div class="sect4">
+<h5 id="_2_2_1_이메일_형식이_올바르지_않은_경우"><a class="link" href="#_2_2_1_이메일_형식이_올바르지_않은_경우">2.2.1. 이메일 형식이 올바르지 않은 경우</a></h5>
 <div class="paragraph">
 <p><strong>Request</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=df1a9d21-b3d0-4d3e-940d-452cc1a3437a HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/members/signin?_csrf=df1a9d21-b3d0-4d3e-940d-452cc1a3437a HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 55
@@ -727,7 +729,7 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 400 Bad Request
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -741,14 +743,14 @@ Content-Length: 104
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_비밀번호가_8글자_이상이_아닌_경우_2"><a class="link" href="#_비밀번호가_8글자_이상이_아닌_경우_2">2.2.2. 비밀번호가 8글자 이상이 아닌 경우</a></h4>
+<div class="sect4">
+<h5 id="_2_2_2_비밀번호가_8글자_이상이_아닌_경우"><a class="link" href="#_2_2_2_비밀번호가_8글자_이상이_아닌_경우">2.2.2. 비밀번호가 8글자 이상이 아닌 경우</a></h5>
 <div class="paragraph">
 <p><strong>Request</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=9aa1c899-878f-4c54-9f29-3ddb506f6943 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/members/signin?_csrf=9aa1c899-878f-4c54-9f29-3ddb506f6943 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 47
@@ -762,7 +764,7 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 400 Bad Request
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -776,14 +778,14 @@ Content-Length: 91
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_비밀번호가_공백인_경우_2"><a class="link" href="#_비밀번호가_공백인_경우_2">2.2.3. 비밀번호가 공백인 경우</a></h4>
+<div class="sect4">
+<h5 id="_2_2_3_비밀번호가_공백인_경우"><a class="link" href="#_2_2_3_비밀번호가_공백인_경우">2.2.3. 비밀번호가 공백인 경우</a></h5>
 <div class="paragraph">
 <p><strong>Request</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/v1/members/signin?_csrf=0dbfd580-e3fb-4be4-81a5-200310cfa7f9 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/members/signin?_csrf=0dbfd580-e3fb-4be4-81a5-200310cfa7f9 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 44
@@ -797,7 +799,7 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 400 Bad Request
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -815,11 +817,430 @@ Content-Length: 88
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_post_api"><a class="link" href="#_post_api">Post API</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_게시글_생성"><a class="link" href="#_1_게시글_생성">1. 게시글 생성</a></h3>
+<div class="sect3">
+<h4 id="_1_1_성공_2"><a class="link" href="#_1_1_성공_2">1.1. 성공</a></h4>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/posts?_csrf=fd6de8e9-ecb8-4ca5-9b89-06912d0cedf8 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 37
+Host: localhost:8080
+
+{"title":"Title","content":"Content"}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Request Field</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">제목</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">내용</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_1_2_실패_2"><a class="link" href="#_1_2_실패_2">1.2. 실패</a></h4>
+<div class="sect4">
+<h5 id="_1_2_1_사용자_인증이_안_된_경우"><a class="link" href="#_1_2_1_사용자_인증이_안_된_경우">1.2.1. 사용자 인증이 안 된 경우</a></h5>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/posts?_csrf=6db9e62c-24c4-41a6-a26b-67bf1225e25c HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 37
+Host: localhost:8080
+
+{"title":"Title","content":"Content"}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Basic realm="Realm"
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_1_2_2_title제목이_없는_경우"><a class="link" href="#_1_2_2_title제목이_없는_경우">1.2.2. Title(제목)이 없는 경우</a></h5>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/posts?_csrf=4cbd4019-2b2f-46d2-82b1-69602572a503 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 32
+Host: localhost:8080
+
+{"title":"","content":"Content"}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 75
+
+{"message":"title 필드는 공백일 수 없습니다. (전달된 값: )"}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_1_2_3_content내용이_없는_경우"><a class="link" href="#_1_2_3_content내용이_없는_경우">1.2.3. Content(내용)이 없는 경우</a></h5>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v1/posts?_csrf=dd173c62-659f-497f-b5d4-bb1fea3b4064 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 31
+Host: localhost:8080
+
+{"title":"Ttitle","content":""}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 77
+
+{"message":"content 필드는 공백일 수 없습니다. (전달된 값: )"}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_게시글_조회"><a class="link" href="#_2_게시글_조회">2. 게시글 조회</a></h3>
+<div class="sect3">
+<h4 id="_2_1_성공_2"><a class="link" href="#_2_1_성공_2">2.1. 성공</a></h4>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v1/posts/1 HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Request Field</strong>
+./api/v1/posts/{id}</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 ID</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 37
+
+{"title":"title","content":"content"}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2_2_실패_2"><a class="link" href="#_2_2_실패_2">2.2. 실패</a></h4>
+<div class="sect4">
+<h5 id="_2_2_1_사용자_인증이_안_된_경우"><a class="link" href="#_2_2_1_사용자_인증이_안_된_경우">2.2.1. 사용자 인증이 안 된 경우</a></h5>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v1/posts/1 HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Basic realm="Realm"
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_게시글_수정"><a class="link" href="#_3_게시글_수정">3. 게시글 수정</a></h3>
+<div class="sect3">
+<h4 id="_3_1_성공"><a class="link" href="#_3_1_성공">3.1. 성공</a></h4>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /api/v1/posts/1?_csrf=b03f565f-548f-4475-9725-317a8014fc49 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 49
+Host: localhost:8080
+
+{"title":"updateTitle","content":"updateContent"}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Request Field</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">제목</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">내용</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_3_2_실패"><a class="link" href="#_3_2_실패">3.2. 실패</a></h4>
+<div class="sect4">
+<h5 id="_3_2_1_사용자_인증이_안_된_경우"><a class="link" href="#_3_2_1_사용자_인증이_안_된_경우">3.2.1. 사용자 인증이 안 된 경우</a></h5>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /api/v1/posts/1?_csrf=fcaf40e6-d652-4704-be20-3f8906003d90 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 49
+Host: localhost:8080
+
+{"title":"updateTitle","content":"updateContent"}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Basic realm="Realm"
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_게시글_삭제"><a class="link" href="#_4_게시글_삭제">4. 게시글 삭제</a></h3>
+<div class="sect3">
+<h4 id="_4_1_성공"><a class="link" href="#_4_1_성공">4.1. 성공</a></h4>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/v1/posts/1?_csrf=8e4f49fd-8905-4829-9bd1-4aa7ac972a41 HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_2_실패"><a class="link" href="#_4_2_실패">4.2. 실패</a></h4>
+<div class="sect4">
+<h5 id="_4_2_1_사용자_인증이_안_된_경우"><a class="link" href="#_4_2_1_사용자_인증이_안_된_경우">4.2.1. 사용자 인증이 안 된 경우</a></h5>
+<div class="paragraph">
+<p><strong>Request</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/v1/posts/1?_csrf=02371d0c-f9fc-4612-8dec-84c8784fbd1e HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Response</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Basic realm="Realm"
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-08-08 01:57:26 +0900
+Last updated 2023-08-09 21:31:10 +0900
 </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
 </body>
 </html>
