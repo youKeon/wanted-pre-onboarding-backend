@@ -5,6 +5,7 @@ import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
 import com.yukeon.wantedpreonboardingbackend.member.dto.request.MemberSignInRequest;
 import com.yukeon.wantedpreonboardingbackend.member.dto.request.MemberSignUpRequest;
 import com.yukeon.wantedpreonboardingbackend.member.dto.response.MemberSignInResponse;
+import com.yukeon.wantedpreonboardingbackend.member.exception.NoSuchMemberException;
 import com.yukeon.wantedpreonboardingbackend.member.persistence.MemberRepository;
 import com.yukeon.wantedpreonboardingbackend.member.util.MemberInfo;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -71,9 +75,40 @@ public class MemberServiceTest {
 
         //when
         when(jwtTokenProvider.generateToken(member.getEmail())).thenReturn(accessToken);
+        when(memberRepository.findByEmail(member.getEmail())).thenReturn(Optional.ofNullable(member));
+        when(passwordEncoder.matches(request.getPassword(), member.getPassword())).thenReturn(true);
         MemberSignInResponse response = memberService.signIn(request);
 
         //then
         assertThat(response.getAccessToken()).isEqualTo(accessToken);
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 이메일 주소로 로그인을 시도하면 예외가 발생한다")
+    public void signInNoSuchEmailExceptionTest() throws Exception {
+        //given
+        MemberSignInRequest request = new MemberSignInRequest("noSuchEmail@naver.com", "12345678");
+
+        //when, then
+        assertThatThrownBy(
+                () -> memberService.signIn(request))
+                .isInstanceOf(NoSuchMemberException.class)
+                .hasMessageContaining("로그인에 실패했습니다.");
+    }
+
+    @Test
+    @DisplayName("DB에 저장된 비밀번호와 로그인 요청으로 들어온 비밀번호가 다르면 예외가 발생한다")
+    public void signInNotEqualsPasswordExceptionTest() throws Exception {
+        //given
+        MemberSignInRequest request = new MemberSignInRequest(member.getEmail(), "notEqualsPassword");
+
+        //when
+        when(memberRepository.findByEmail(member.getEmail())).thenReturn(Optional.ofNullable(member));
+
+        //then
+        assertThatThrownBy(
+                () -> memberService.signIn(request))
+                .isInstanceOf(NoSuchMemberException.class)
+                .hasMessageContaining("로그인에 실패했습니다.");
     }
 }
