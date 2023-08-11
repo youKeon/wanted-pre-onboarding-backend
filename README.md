@@ -24,6 +24,8 @@ $ ./gradlew build
 $ sudo docker-compose up -d
 ```
 
+3. API 실행
+- [Swagger 주소](http://52.78.231.54:8080/swagger-ui/index.html#/)
 
 <br>
 
@@ -40,7 +42,7 @@ $ sudo docker-compose up -d
 <br>
 
 ## API 데모 영상
-- [데모 영상 링크](https://drive.google.com/file/d/1IjHXXlYGxoqXKqX4uyL0hyr4FEiZLp9t/view?usp=drive_link)
+- [데모 영상 링크](https://drive.google.com/file/d/1qNj_g4l32fO5qa7R-gRkkag5dxfTZQZ-/view?usp=drive_link)
 
 ## 구현 설명
 ### `회원`
