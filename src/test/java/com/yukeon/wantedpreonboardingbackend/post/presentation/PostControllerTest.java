@@ -224,6 +224,57 @@ public class PostControllerTest extends ControllerTest {
     }
 
     @Test
+    @WithMockUser
+    @DisplayName("게시글 수정 시 제목이 공백이면 예외가 발생한다")
+    public void updatePostEmptyTitleException() throws Exception {
+        //given
+        PostUpdateRequest request = new PostUpdateRequest("", "Content");
+
+        //then
+        mockMvc.perform(put(baseURL + "/{id}", post1.getId())
+                        .with(csrf())
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("post/update/fail/emptyTitle",
+                        requestFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));;
+    }
+
+    @Test
+    @WithMockUser
+    @DisplayName("게시글 수정 시 내용이 공백이면 예외가 발생한다")
+    public void updatePostEmptyContentException() throws Exception {
+        //given
+        PostUpdateRequest request = new PostUpdateRequest("Title", "");
+
+        //then
+        mockMvc.perform(put(baseURL + "/{id}", post1.getId())
+                        .with(csrf())
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andDo(print())
+                .andDo(document("post/update/fail/emptyTitle",
+                        requestFields(
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용")
+                        ),
+                        responseFields(
+                                fieldWithPath("message").description("응답 메세지")
+                        )
+                ));;
+    }
+    @Test
     @WithAnonymousUser
     @DisplayName("인증되지 않은 사용자는 게시글을 수정할 수 없다")
     public void updatePostByUnauthorizedMember() throws Exception {
