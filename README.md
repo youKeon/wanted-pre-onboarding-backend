@@ -5,33 +5,41 @@
 
 <br>
 
+## 클라우드 배포 주소
+- `52.78.231.54`
+
+<br>
+
+## AWS 아키텍처
+![image](https://github.com/youKeon/wanted-pre-onboarding-backend/assets/96862049/6de8014a-b578-4e9b-91e2-c44f2b4b9138)
+
 ## 실행 방법
 1. build
 ```java
-$ ./gradlew build jar -x test
+$ ./gradlew build
 ```
 
-2. docker 실행
+2. docker-compose 실행
 ```java
-$ docker-compose up --build -d
+$ sudo docker-compose up -d
 ```
 
 
 <br>
 
 ## ERD
-![스크린샷 2023-08-10 21.20.45.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2F00%2F68jpnmhx1qb3745ll7gz5c4r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_ohEo5N%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-08-10%2021.20.45.png)
+<img width="587" alt="스크린샷 2023-08-11 20 45 51" src="https://github.com/youKeon/wanted-pre-onboarding-backend/assets/96862049/e929cbbf-b6f3-4a04-bf47-d79d522d8e2b">
 - Member(사용자)와 Post(게시글)의 관계를 1:N 관계로 설정
 
 <br>
 
 ## API 명세서
-[- 링크
-](https://shell-pancreas-3d6.notion.site/API-Docs-d7cc86b3b2784db493a46b391a246165?pvs=4)
+- [REST Docs 기반 API 명세서](http://52.78.231.54:8080/)
+- [Swagger API 명세서](http://52.78.231.54:8080/swagger-ui/index.html#/)
 <br>
 
 ## API 데모 영상
-
+- [데모 영상 링크](https://drive.google.com/file/d/1IjHXXlYGxoqXKqX4uyL0hyr4FEiZLp9t/view?usp=drive_link)
 
 ## 구현 설명
 ### `회원`
