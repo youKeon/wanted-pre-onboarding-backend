@@ -29,6 +29,7 @@ $ sudo docker-compose up -d
 
 ## ERD
 <img width="587" alt="스크린샷 2023-08-11 20 45 51" src="https://github.com/youKeon/wanted-pre-onboarding-backend/assets/96862049/e929cbbf-b6f3-4a04-bf47-d79d522d8e2b">
+
 - Member(사용자)와 Post(게시글)의 관계를 1:N 관계로 설정
 
 <br>
