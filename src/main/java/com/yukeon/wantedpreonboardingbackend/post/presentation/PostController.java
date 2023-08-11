@@ -40,7 +40,7 @@ public class PostController {
     @PutMapping("/{id}")
     public void update(@PathVariable Long id,
                        @AuthenticationPrincipal MemberInfo memberInfo,
-                       @RequestBody PostUpdateRequest request) {
+                       @Valid @RequestBody PostUpdateRequest request) {
         postService.update(id, memberInfo, request);
     }
 
