@@ -33,7 +33,7 @@ public class PostTest {
     @DisplayName("게시글 생성 시 content가 공백이면 예외가 발생한다")
     public void createPostEmptyContentException() throws Exception {
         //given, when, then
-        assertThatThrownBy(() -> new Post(member, "", "title"))
+        assertThatThrownBy(() -> new Post(member, "title", ""))
                 .isInstanceOf(InvalidPostException.class)
                 .hasMessageContaining("Content는 공백일 수 없습니다.");;
     }
@@ -42,7 +42,7 @@ public class PostTest {
     @DisplayName("게시글 생성 시 title이 공백이면 예외가 발생한다")
     public void createPostEmptyTitleException() throws Exception {
         //given, when, then
-        assertThatThrownBy(() -> new Post(member, "content", ""))
+        assertThatThrownBy(() -> new Post(member, "", "content"))
                 .isInstanceOf(InvalidPostException.class)
                 .hasMessageContaining("Title은 공백일 수 없습니다.");
     }
