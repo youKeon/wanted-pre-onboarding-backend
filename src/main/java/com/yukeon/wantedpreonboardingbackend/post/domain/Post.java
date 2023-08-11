@@ -2,7 +2,6 @@ package com.yukeon.wantedpreonboardingbackend.post.domain;
 
 import com.yukeon.wantedpreonboardingbackend.common.BaseEntity;
 import com.yukeon.wantedpreonboardingbackend.member.domain.Member;
-import com.yukeon.wantedpreonboardingbackend.member.exception.InvalidMemberException;
 import com.yukeon.wantedpreonboardingbackend.post.exception.InvalidPostException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,15 +28,16 @@ public class Post extends BaseEntity {
     private boolean isDeleted;
 
     public Post(Member member,
-                String content,
-                String title) {
+                String title,
+                String content) {
+
 
         validateContent(content);
         validateTitle(title);
 
         this.member = member;
-        this.content = content;
         this.title = title;
+        this.content = content;
         this.isDeleted = false;
     }
 
